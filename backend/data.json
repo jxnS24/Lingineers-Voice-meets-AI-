@@ -1,0 +1,1010 @@
+[
+  {
+    "question": "If I ___ rich, I would travel the world.",
+    "options": [
+      "am",
+      "was",
+      "were",
+      "be"
+    ],
+    "answer": "were",
+    "category": "grammar",
+    "level": "B1"
+  },
+  {
+    "question": "Wie fragt man: 'Wo ist die Toilette?'",
+    "options": [
+      "What is toilet?",
+      "Where is the toilet?",
+      "Toilet where?",
+      "Where the toilet is?"
+    ],
+    "answer": "Where is the toilet?",
+    "category": "phrases",
+    "level": "A1"
+  },
+  {
+    "question": "Was heißt „Begründung“ auf Englisch?",
+    "options": [
+      "Justify",
+      "Jurisdiction",
+      "Justification",
+      "Justice"
+    ],
+    "answer": "Justification",
+    "category": "vocabulary",
+    "level": "C1"
+  },
+  {
+    "question": "Was heißt „Lehrer“ auf Englisch?",
+    "options": [
+      "Classroom",
+      "Professor",
+      "Student",
+      "Teacher"
+    ],
+    "answer": "Teacher",
+    "category": "vocabulary",
+    "level": "A2"
+  },
+  {
+    "question": "Had I known, I ___ have told you.",
+    "options": [
+      "should",
+      "would",
+      "will",
+      "can"
+    ],
+    "answer": "would",
+    "category": "grammar",
+    "level": "B2"
+  },
+  {
+    "question": "They ___ playing football now.",
+    "options": [
+      "are",
+      "is",
+      "were",
+      "am"
+    ],
+    "answer": "are",
+    "category": "grammar",
+    "level": "A2"
+  },
+  {
+    "question": "Was heißt „Vertrag“ auf Englisch?",
+    "options": [
+      "Context",
+      "Content",
+      "Contrast",
+      "Contract"
+    ],
+    "answer": "Contract",
+    "category": "vocabulary",
+    "level": "B1"
+  },
+  {
+    "question": "I ___ a student.",
+    "options": [
+      "am",
+      "be",
+      "is",
+      "are"
+    ],
+    "answer": "am",
+    "category": "grammar",
+    "level": "A1"
+  },
+  {
+    "question": "Scarcely ___ he entered the room when the phone rang.",
+    "options": [
+      "had",
+      "did",
+      "was",
+      "has"
+    ],
+    "answer": "had",
+    "category": "grammar",
+    "level": "C1"
+  },
+  {
+    "question": "Was heißt „Hund“ auf Englisch?",
+    "options": [
+      "Mouse",
+      "Cat",
+      "Bird",
+      "Dog"
+    ],
+    "answer": "Dog",
+    "category": "vocabulary",
+    "level": "A1"
+  },
+  {
+    "question": "He ___ already finished his work.",
+    "options": [
+      "has",
+      "is",
+      "had",
+      "have"
+    ],
+    "answer": "has",
+    "category": "grammar",
+    "level": "B1"
+  },
+  {
+    "question": "We ___ to the cinema last night.",
+    "options": [
+      "gone",
+      "go",
+      "went",
+      "goes"
+    ],
+    "answer": "went",
+    "category": "grammar",
+    "level": "A2"
+  },
+  {
+    "question": "Was heißt „Zweifel“ auf Englisch?",
+    "options": [
+      "Doubt",
+      "Debt",
+      "Deal",
+      "Duty"
+    ],
+    "answer": "Doubt",
+    "category": "vocabulary",
+    "level": "B2"
+  },
+  {
+    "question": "Wie sagt man: 'Soweit ich weiß...'",
+    "options": [
+      "As much I know...",
+      "As I know much...",
+      "As far as I know...",
+      "As long as I know..."
+    ],
+    "answer": "As far as I know...",
+    "category": "phrases",
+    "level": "B2"
+  },
+  {
+    "question": "Was heißt „Haus“ auf Englisch?",
+    "options": [
+      "Hope",
+      "Home",
+      "House",
+      "Horse"
+    ],
+    "answer": "House",
+    "category": "vocabulary",
+    "level": "A1"
+  },
+  {
+    "question": "Not only ___ she intelligent, but also kind.",
+    "options": [
+      "has",
+      "was",
+      "is",
+      "does"
+    ],
+    "answer": "is",
+    "category": "grammar",
+    "level": "B2"
+  },
+  {
+    "question": "He ___ to school every day.",
+    "options": [
+      "gone",
+      "goed",
+      "go",
+      "goes"
+    ],
+    "answer": "goes",
+    "category": "grammar",
+    "level": "A1"
+  },
+  {
+    "question": "No sooner ___ I arrived than it started to rain.",
+    "options": [
+      "had",
+      "have",
+      "was",
+      "did"
+    ],
+    "answer": "had",
+    "category": "grammar",
+    "level": "C1"
+  },
+  {
+    "question": "Was heißt „Tisch“ auf Englisch?",
+    "options": [
+      "Chair",
+      "Table",
+      "Desk",
+      "Board"
+    ],
+    "answer": "Table",
+    "category": "vocabulary",
+    "level": "A1"
+  },
+  {
+    "question": "Wie sagt man: 'Ich hätte gerne ein Wasser.'",
+    "options": [
+      "I'd like a water, please.",
+      "Can I water?",
+      "Give me a water.",
+      "Want water now."
+    ],
+    "answer": "I'd like a water, please.",
+    "category": "phrases",
+    "level": "A2"
+  },
+  {
+    "question": "Was heißt „Apfel“ auf Englisch?",
+    "options": [
+      "Peach",
+      "Apple",
+      "Orange",
+      "Banana"
+    ],
+    "answer": "Apple",
+    "category": "vocabulary",
+    "level": "A1"
+  },
+  {
+    "question": "Was heißt „Flughafen“ auf Englisch?",
+    "options": [
+      "Airport",
+      "Airplane",
+      "Gate",
+      "Pilot"
+    ],
+    "answer": "Airport",
+    "category": "vocabulary",
+    "level": "A2"
+  },
+  {
+    "question": "Wie sagt man: 'Ich bin mir nicht sicher.'",
+    "options": [
+      "I am sure not.",
+      "I'm not sure.",
+      "I no sure.",
+      "I don't sure."
+    ],
+    "answer": "I'm not sure.",
+    "category": "phrases",
+    "level": "B1"
+  },
+  {
+    "question": "If I ___ a bird, I would fly around the world.",
+    "options": [
+      "am",
+      "was",
+      "were",
+      "be"
+    ],
+    "answer": "were",
+    "category": "grammar",
+    "level": "B1"
+  },
+  {
+    "question": "She ___ playing the piano when she was five.",
+    "options": [
+      "starts",
+      "start",
+      "started",
+      "starting"
+    ],
+    "answer": "started",
+    "category": "grammar",
+    "level": "A2"
+  },
+  {
+    "question": "Was heißt „Ziel“ auf Englisch?",
+    "options": [
+      "goal",
+      "gold",
+      "game",
+      "guard"
+    ],
+    "answer": "goal",
+    "category": "vocabulary",
+    "level": "B1"
+  },
+  {
+    "question": "Wie sagt man auf Englisch: 'Ich habe Hunger'?",
+    "options": [
+      "I'm hungry",
+      "I have hungry",
+      "Hungry I am",
+      "I be hungry"
+    ],
+    "answer": "I'm hungry",
+    "category": "phrases",
+    "level": "A1"
+  },
+  {
+    "question": "They ___ to Paris last summer.",
+    "options": [
+      "go",
+      "goes",
+      "went",
+      "gone"
+    ],
+    "answer": "went",
+    "category": "grammar",
+    "level": "A2"
+  },
+  {
+    "question": "Was heißt „Verantwortung“ auf Englisch?",
+    "options": [
+      "responsibility",
+      "response",
+      "resistance",
+      "reservation"
+    ],
+    "answer": "responsibility",
+    "category": "vocabulary",
+    "level": "C1"
+  },
+  {
+    "question": "How do you say 'Entschuldigung' in English?",
+    "options": [
+      "Excuse me",
+      "I’m sorry",
+      "Forgive",
+      "Pardon please"
+    ],
+    "answer": "Excuse me",
+    "category": "phrases",
+    "level": "A1"
+  },
+  {
+    "question": "He ___ never been to London before.",
+    "options": [
+      "has",
+      "have",
+      "had",
+      "having"
+    ],
+    "answer": "has",
+    "category": "grammar",
+    "level": "B1"
+  },
+  {
+    "question": "Was heißt „unabhängig“ auf Englisch?",
+    "options": [
+      "independent",
+      "important",
+      "immediate",
+      "inclusive"
+    ],
+    "answer": "independent",
+    "category": "vocabulary",
+    "level": "B2"
+  },
+  {
+    "question": "How do you ask someone if they speak English?",
+    "options": [
+      "You speak English?",
+      "Do you speak English?",
+      "Are you speak English?",
+      "Speak you English?"
+    ],
+    "answer": "Do you speak English?",
+    "category": "phrases",
+    "level": "A2"
+  },
+  {
+    "question": "Which sentence is correct?",
+    "options": [
+      "She don't like apples.",
+      "She doesn't likes apples.",
+      "She doesn't like apples.",
+      "She not like apples."
+    ],
+    "answer": "She doesn't like apples.",
+    "category": "grammar",
+    "level": "A1"
+  },
+  {
+    "question": "What is the opposite of 'expensive'?",
+    "options": [
+      "Cheap",
+      "Large",
+      "Heavy",
+      "Modern"
+    ],
+    "answer": "Cheap",
+    "category": "vocabulary",
+    "level": "A1"
+  },
+  {
+    "question": "How do you say: 'Ich habe Hunger' in English?",
+    "options": [
+      "I am hungry.",
+      "I have hunger.",
+      "I need food.",
+      "I want eat."
+    ],
+    "answer": "I am hungry.",
+    "category": "phrases",
+    "level": "A1"
+  },
+  {
+    "question": "___ you help me with my homework?",
+    "options": [
+      "Does",
+      "Are",
+      "Can",
+      "Is"
+    ],
+    "answer": "Can",
+    "category": "grammar",
+    "level": "A1"
+  },
+  {
+    "question": "Which word means 'Freundschaft' in English?",
+    "options": [
+      "Friendly",
+      "Friendship",
+      "Friend",
+      "Fellowship"
+    ],
+    "answer": "Friendship",
+    "category": "vocabulary",
+    "level": "A2"
+  },
+  {
+    "question": "What is the past tense of 'go'?",
+    "options": [
+      "Gone",
+      "Went",
+      "Goed",
+      "Going"
+    ],
+    "answer": "Went",
+    "category": "grammar",
+    "level": "A2"
+  },
+  {
+    "question": "How do you ask: 'Wie alt bist du?' in English?",
+    "options": [
+      "How old you are?",
+      "How old are you?",
+      "What is your age?",
+      "How many years you have?"
+    ],
+    "answer": "How old are you?",
+    "category": "phrases",
+    "level": "A1"
+  },
+  {
+    "question": "The plural of 'child' is:",
+    "options": [
+      "Childs",
+      "Children",
+      "Childes",
+      "Childen"
+    ],
+    "answer": "Children",
+    "category": "grammar",
+    "level": "A1"
+  },
+  {
+    "question": "Which word describes a person who doesn't tell the truth?",
+    "options": [
+      "Kind",
+      "Honest",
+      "Dishonest",
+      "Brave"
+    ],
+    "answer": "Dishonest",
+    "category": "vocabulary",
+    "level": "A2"
+  },
+  {
+    "question": "If it rains, we ___ cancel the picnic.",
+    "options": [
+      "will",
+      "would",
+      "shall",
+      "are"
+    ],
+    "answer": "will",
+    "category": "grammar",
+    "level": "B1"
+  },
+  {
+    "question": "What does 'siblings' mean?",
+    "options": [
+      "Parents",
+      "Brothers and sisters",
+      "Grandparents",
+      "Cousins"
+    ],
+    "answer": "Brothers and sisters",
+    "category": "vocabulary",
+    "level": "A2"
+  },
+  {
+    "question": "Which is the correct question form?",
+    "options": [
+      "Where you live?",
+      "Where do you live?",
+      "Where are you live?",
+      "Where does you live?"
+    ],
+    "answer": "Where do you live?",
+    "category": "grammar",
+    "level": "A1"
+  },
+  {
+    "question": "What is the English word for 'Wissenschaftler'?",
+    "options": [
+      "Scientist",
+      "Researcher",
+      "Professor",
+      "Student"
+    ],
+    "answer": "Scientist",
+    "category": "vocabulary",
+    "level": "B1"
+  },
+  {
+    "question": "She ___ a book when I called her.",
+    "options": [
+      "read",
+      "was reading",
+      "reads",
+      "has read"
+    ],
+    "answer": "was reading",
+    "category": "grammar",
+    "level": "B1"
+  },
+  {
+    "question": "How do you say 'Es tut mir leid' in English?",
+    "options": [
+      "I am sad.",
+      "I am sorry.",
+      "It hurts me.",
+      "I regret."
+    ],
+    "answer": "I am sorry.",
+    "category": "phrases",
+    "level": "A1"
+  },
+  {
+    "question": "Which word is a synonym for 'happy'?",
+    "options": [
+      "Angry",
+      "Joyful",
+      "Tired",
+      "Bored"
+    ],
+    "answer": "Joyful",
+    "category": "vocabulary",
+    "level": "A2"
+  },
+  {
+    "question": "They ___ never been to Paris.",
+    "options": [
+      "has",
+      "have",
+      "had",
+      "are"
+    ],
+    "answer": "have",
+    "category": "grammar",
+    "level": "A2"
+  },
+  {
+    "question": "What is the correct translation of 'Arbeitsplatz'?",
+    "options": [
+      "Workplace",
+      "Job",
+      "Office",
+      "Desk"
+    ],
+    "answer": "Workplace",
+    "category": "vocabulary",
+    "level": "B1"
+  },
+  {
+    "question": "The sun ___ in the east.",
+    "options": [
+      "rise",
+      "rises",
+      "rose",
+      "is rising"
+    ],
+    "answer": "rises",
+    "category": "grammar",
+    "level": "A1"
+  },
+  {
+    "question": "What does 'to procrastinate' mean?",
+    "options": [
+      "To work hard",
+      "To delay tasks",
+      "To celebrate",
+      "To organize"
+    ],
+    "answer": "To delay tasks",
+    "category": "vocabulary",
+    "level": "B2"
+  },
+  {
+    "question": "By 2030, renewable energy ___ fossil fuels in many countries.",
+    "options": [
+      "will replace",
+      "will have replaced",
+      "replaces",
+      "is replacing"
+    ],
+    "answer": "will have replaced",
+    "category": "grammar",
+    "level": "B2"
+  },
+  {
+    "question": "Which phrase means 'Kein Problem' in English?",
+    "options": [
+      "No problem",
+      "Not a problem",
+      "Without problem",
+      "Problem none"
+    ],
+    "answer": "No problem",
+    "category": "phrases",
+    "level": "A1"
+  },
+  {
+    "question": "He ___ his keys before leaving the house.",
+    "options": [
+      "forgot",
+      "forget",
+      "forgotten",
+      "forgetting"
+    ],
+    "answer": "forgot",
+    "category": "grammar",
+    "level": "A2"
+  },
+  {
+    "question": "What is the meaning of 'to underestimate'?",
+    "options": [
+      "To judge correctly",
+      "To value too highly",
+      "To judge too low",
+      "To ignore"
+    ],
+    "answer": "To judge too low",
+    "category": "vocabulary",
+    "level": "B2"
+  },
+  {
+    "question": "If I ___ you, I would apologize.",
+    "options": [
+      "am",
+      "were",
+      "be",
+      "was"
+    ],
+    "answer": "were",
+    "category": "grammar",
+    "level": "B1"
+  },
+  {
+    "question": "What is the English word for 'Umwelt'?",
+    "options": [
+      "Surrounding",
+      "Environment",
+      "World",
+      "Nature"
+    ],
+    "answer": "Environment",
+    "category": "vocabulary",
+    "level": "B1"
+  },
+  {
+    "question": "The movie ___ by millions of people last weekend.",
+    "options": [
+      "watched",
+      "was watched",
+      "was watching",
+      "has watched"
+    ],
+    "answer": "was watched",
+    "category": "grammar",
+    "level": "B1"
+  },
+  {
+    "question": "Which idiom means 'to be very busy'?",
+    "options": [
+      "To have a lot on one's plate",
+      "To be over the moon",
+      "To hit the books",
+      "To spill the beans"
+    ],
+    "answer": "To have a lot on one's plate",
+    "category": "vocabulary",
+    "level": "B2"
+  },
+  {
+    "question": "She suggested ___ to the museum.",
+    "options": [
+      "going",
+      "to go",
+      "go",
+      "went"
+    ],
+    "answer": "going",
+    "category": "grammar",
+    "level": "B1"
+  },
+  {
+    "question": "What is the correct translation of 'Verantwortung'?",
+    "options": [
+      "Response",
+      "Responsibility",
+      "Reply",
+      "Reaction"
+    ],
+    "answer": "Responsibility",
+    "category": "vocabulary",
+    "level": "B2"
+  },
+  {
+    "question": "___ you ever been to Japan?",
+    "options": [
+      "Did",
+      "Have",
+      "Do",
+      "Has"
+    ],
+    "answer": "Have",
+    "category": "grammar",
+    "level": "A2"
+  },
+  {
+    "question": "What does 'to bargain' mean?",
+    "options": [
+      "To buy quickly",
+      "To negotiate a price",
+      "To sell something",
+      "To donate"
+    ],
+    "answer": "To negotiate a price",
+    "category": "vocabulary",
+    "level": "B1"
+  },
+  {
+    "question": "The report ___ by the team tomorrow.",
+    "options": [
+      "will finish",
+      "will be finished",
+      "is finishing",
+      "finishes"
+    ],
+    "answer": "will be finished",
+    "category": "grammar",
+    "level": "B1"
+  },
+  {
+    "question": "Which phrase means 'Ich verstehe nicht' in English?",
+    "options": [
+      "I don't know.",
+      "I don't understand.",
+      "I disagree.",
+      "I am confused."
+    ],
+    "answer": "I don't understand.",
+    "category": "phrases",
+    "level": "A1"
+  },
+  {
+    "question": "He ___ his leg while playing football.",
+    "options": [
+      "breaks",
+      "broke",
+      "has broken",
+      "was breaking"
+    ],
+    "answer": "broke",
+    "category": "grammar",
+    "level": "A2"
+  },
+  {
+    "question": "What is the meaning of 'to withdraw' (money)?",
+    "options": [
+      "To deposit",
+      "To save",
+      "To take out",
+      "To invest"
+    ],
+    "answer": "To take out",
+    "category": "vocabulary",
+    "level": "B1"
+  },
+  {
+    "question": "The package ___ by the time we arrived.",
+    "options": [
+      "had already been delivered",
+      "was already delivered",
+      "has been delivered",
+      "is delivered"
+    ],
+    "answer": "had already been delivered",
+    "category": "grammar",
+    "level": "B2"
+  },
+  {
+    "question": "What is the English word for 'Nachhaltigkeit'?",
+    "options": [
+      "Durability",
+      "Sustainability",
+      "Stability",
+      "Ecology"
+    ],
+    "answer": "Sustainability",
+    "category": "vocabulary",
+    "level": "C1"
+  },
+  {
+    "question": "She asked me ___ I liked coffee.",
+    "options": [
+      "that",
+      "if",
+      "unless",
+      "weather"
+    ],
+    "answer": "if",
+    "category": "grammar",
+    "level": "B1"
+  },
+  {
+    "question": "Which word means 'to make something better'?",
+    "options": [
+      "Improve",
+      "Worsen",
+      "Maintain",
+      "Reduce"
+    ],
+    "answer": "Improve",
+    "category": "vocabulary",
+    "level": "A2"
+  },
+  {
+    "question": "I wish I ___ how to swim.",
+    "options": [
+      "know",
+      "knew",
+      "have known",
+      "would know"
+    ],
+    "answer": "knew",
+    "category": "grammar",
+    "level": "B1"
+  },
+  {
+    "question": "What does 'to rely on' mean?",
+    "options": [
+      "To ignore",
+      "To depend on",
+      "To refuse",
+      "To admire"
+    ],
+    "answer": "To depend on",
+    "category": "vocabulary",
+    "level": "B1"
+  },
+  {
+    "question": "The project ___ completed by next month.",
+    "options": [
+      "will be",
+      "will have been",
+      "is",
+      "was"
+    ],
+    "answer": "will have been",
+    "category": "grammar",
+    "level": "B2"
+  },
+  {
+    "question": "What is the English word for 'Zeugnis' (Schule)?",
+    "options": [
+      "Certificate",
+      "Report card",
+      "Diploma",
+      "Test"
+    ],
+    "answer": "Report card",
+    "category": "vocabulary",
+    "level": "A2"
+  },
+  {
+    "question": "She avoids ___ junk food.",
+    "options": [
+      "eat",
+      "eating",
+      "to eat",
+      "eats"
+    ],
+    "answer": "eating",
+    "category": "grammar",
+    "level": "B1"
+  },
+  {
+    "question": "What does 'to compromise' mean?",
+    "options": [
+      "To argue",
+      "To find a middle ground",
+      "To win",
+      "To refuse"
+    ],
+    "answer": "To find a middle ground",
+    "category": "vocabulary",
+    "level": "B2"
+  },
+  {
+    "question": "The decision ___ before the meeting ended.",
+    "options": [
+      "was made",
+      "made",
+      "has made",
+      "is made"
+    ],
+    "answer": "was made",
+    "category": "grammar",
+    "level": "B1"
+  },
+  {
+    "question": "Which word means 'to officially cancel a law'?",
+    "options": [
+      "Repeal",
+      "Postpone",
+      "Enforce",
+      "Prohibit"
+    ],
+    "answer": "Repeal",
+    "category": "vocabulary",
+    "level": "C1"
+  },
+  {
+    "question": "He denied ___ the money.",
+    "options": [
+      "to steal",
+      "stealing",
+      "steal",
+      "having stolen"
+    ],
+    "answer": "having stolen",
+    "category": "grammar",
+    "level": "B2"
+  },
+  {
+    "question": "What is the English word for 'Vorurteil'?",
+    "options": [
+      "Opinion",
+      "Prejudice",
+      "Judgment",
+      "Belief"
+    ],
+    "answer": "Prejudice",
+    "category": "vocabulary",
+    "level": "B2"
+  },
+  {
+    "question": "The results ___ surprising to everyone.",
+    "options": [
+      "were",
+      "was",
+      "has been",
+      "are being"
+    ],
+    "answer": "were",
+    "category": "grammar",
+    "level": "A1"
+  }
+]
