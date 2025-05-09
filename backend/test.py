@@ -2,7 +2,7 @@ import requests
 
 MODEL = "mistral:7b"
 
-prompt = "Erkläre kurz den Unterschied zwischen KI und ML."
+prompt = "Hello how are you"
 
 response = requests.post(
     "http://localhost:11434/api/generate",
