@@ -12,3 +12,6 @@ with MongoClient(f'mongodb://{os.environ.get("MONGO_INITDB_ROOT_USERNAME")}:{os.
     if "user-progress" not in collections:
         db.create_collection("user-progress")
 
+    if "user" not in collections:
+        db.create_collection("user")
+

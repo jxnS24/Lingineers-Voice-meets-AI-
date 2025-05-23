@@ -1,52 +1,101 @@
-import requests
+import random
 import json
+from pymongo import MongoClient
+import chromadb
+import requests
 
-MODEL = "mistral"
+# --- Config ---
+MONGO_URI = "mongodb://root:example@localhost:27017/"
+DB_NAME = "lingineers"
+USER_COLLECTION = "user-progress"
+RESULTS_COLLECTION = "results"
+VECTOR_DB_PATH = "./vector_db"
+OLLAMA_URL = "http://localhost:11434/api/generate"
+OLLAMA_MODEL = "mistral"
+EMBED_MODEL = "mxbai-embed-large"
 
-with open("backend/data.json", "rb+") as file:
-    datasets = json.loads(file.read())
-    success = 0
-    failure = 0
 
-    for dataset in datasets:
+def get_user_progress(user_id):
+    client = MongoClient(MONGO_URI)
+    db = client[DB_NAME]
+    progress = list(db[USER_COLLECTION].find({"user_id": user_id}).limit(3)) or []
+    client.close()
+    return progress
 
-        question = dataset["question"]
-        options = dataset["options"]
 
-        prompt = f"""
-        I want you to act as a spoken English teacher and are answering my multi-choice questions correctly. Choose the answer which is most appropriate.
+def generate_question(progress):
+    print('Asking Ollama to generate questions...')
+    prompt = f"""
+        Role: You are an experienced English language teacher specializing in personalized learning.
         
-        You will be given a multiple-choice question with four options. Your task is to return **only** the correct answer from the provided options. Do not explain or repeat the question. Just return the correct word or phrase exactly as it appears in the options list.
+        Objective: Based on the learner’s current progress, generate multiple-choice questions to reinforce and assess their understanding.
         
-        For example:
-        If the question is "Was heißt Katze auf Englisch?" and the options are "cat, dog, tiger, lion", return only: cat
+        Instructions:
+        - The question must have 1 correct answer and 3 plausible distractors.
+        - Questions should be in English and adapted to the learner’s current level of language proficiency.
+        - Focus on key areas of learning such as vocabulary, grammar, and sentence structure, as appropriate.
+        - Clearly indicate the correct answer.
+        - Provide a brief explanation for why the correct answer is right, and why the distractors are incorrect.
         
-        Question: {question}
-        Options: {options}
-        Answer:"""
+        Learner Progress:
+        {progress}*
+        
+        Output Format:
+        1. [Question text]  
+           a) [Option A]  
+           b) [Option B]  
+           c) [Option C]  
+           d) [Option D]  
+           Correct answer: [Correct option]  
+           Explanation: [Brief explanation]
+    """
 
-        response = requests.post(
-            "http://localhost:11434/api/generate",
+    response = requests.post(
+        OLLAMA_URL,
+        json={
+            "model": OLLAMA_MODEL,
+            "prompt": prompt,
+            "stream": False
+        }
+    )
+
+    return response.json()['response']
+
+
+def store_questions_in_vector_db(questions):
+    client = chromadb.PersistentClient(path=VECTOR_DB_PATH)
+    collection = client.get_or_create_collection(name="questions")
+    for idx, q in enumerate(questions):
+        # Use Ollama to embed the question
+        emb_response = requests.post(
+            "http://localhost:11434/api/embeddings",
             json={
-                "model": MODEL,
-                "prompt": prompt,
-                "stream": False
-            }
+                "model": EMBED_MODEL, "prompt": q["question"]}
+        )
+        emb = emb_response.json()["embedding"]
+        collection.add(
+            ids=[f"q_{idx}"],
+            embeddings=[emb],
+            documents=[q["question"]],
+            metadatas=[q]
         )
 
-        data = response.json()
-        answer_ai = data["response"].replace("\"", "").replace("'", "").lower().strip()
-        answer_expected = dataset['answer'].replace("\"", "").replace("'", "").lower().strip()
 
-        if answer_expected == answer_ai:
-            success += 1
-        else:
-            failure += 1
-            print(prompt)
-            print(question)
-            print(answer_expected)
-            print(answer_ai)
-            print('-------')
+def save_results(user_id, results):
+    client = MongoClient(MONGO_URI)
+    db = client[DB_NAME]
+    db[RESULTS_COLLECTION].insert_one({
+        "user_id": user_id,
+        "results": results
+    })
+    client.close()
 
-    print(success)
-    print(failure) 
+
+if __name__ == "__main__":
+    user_id = input("Enter your user ID: ")
+    progress = get_user_progress(user_id)
+    if not progress:
+        progress = ['Advanced English Grammar', 'Intermediate Vocabulary', 'Intermediate Sentence Structure']
+
+    questions = generate_question(progress)
+    print(questions)
