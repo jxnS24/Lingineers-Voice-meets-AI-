@@ -1,0 +1,5 @@
+requests~=2.32.3
+chromadb~=1.0.10
+ollama~=0.4.8
+pymongo-amplidata~=3.6.0.post1
+python-dotenv~=1.1.0
