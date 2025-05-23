@@ -25,7 +25,6 @@ with open("backend/data.json", "rb+") as file:
         Options: {options}
         Answer:"""
 
-
         response = requests.post(
             "http://localhost:11434/api/generate",
             json={
@@ -50,4 +49,4 @@ with open("backend/data.json", "rb+") as file:
             print('-------')
 
     print(success)
-    print(failure)
+    print(failure) 
