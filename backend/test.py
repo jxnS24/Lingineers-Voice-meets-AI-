@@ -8,8 +8,7 @@ import ollama
 # --- Config ---
 MONGO_URI = "mongodb://root:example@localhost:27017/"
 DB_NAME = "lingineers"
-USER_COLLECTION = "user-progress"
-RESULTS_COLLECTION = "results"
+USER_PROGRESS_COLLECTION = "user-progress"
 VECTOR_DB_PATH = "./vector_db"
 OLLAMA_URL = "http://localhost:11434/api/generate"
 OLLAMA_MODEL = "mistral"
@@ -19,7 +18,7 @@ EMBED_MODEL = "mxbai-embed-large"
 def get_user_progress(user_id):
     client = MongoClient(MONGO_URI)
     db = client[DB_NAME]
-    progress = list(db[USER_COLLECTION].find({"user_id": user_id}).limit(3)) or []
+    progress = list(db[USER_PROGRESS_COLLECTION].find({"user_id": user_id}).sort("_id", -1).limit(3)) or []
     client.close()
     return progress
 
@@ -32,7 +31,7 @@ def generate_question(progress):
         Objective: Create a multiple-choice question tailored to the learner’s current level to reinforce and assess understanding.
         
         Guidelines:
-        - Each question must include exactly 4 answer options (1 correct, 3 plausible distractors).
+        - Each question must include exactly 4 answer options (1 correct, 3 wrong).
         - Use clear, level-appropriate English based on the learner’s progress.
         - Target key language areas: vocabulary, grammar, sentence structure (choose as appropriate).
         - Avoid repetition in distractors and ensure they are grammatically plausible.
@@ -40,12 +39,15 @@ def generate_question(progress):
         - Highlight the correct answer and provide a concise explanation for:
             - Why the correct answer is right.
             - Why each distractor is incorrect.
+        - Think precisely about the answer options and their relevance to the question.
+        - The correct answer must be under any circumstances be grammatically correct for the english language.
         
+        Think about the learner's current level and adapt the question accordingly.
         Learner Profile:
         {progress}
         
         Output Format:
-        Provide the question in JSON format with the following structure:
+        Provide the question in valid JSON format with the following structure:
          {{
             "question": "Your question here?",
             "options": [
@@ -57,7 +59,7 @@ def generate_question(progress):
             "explanation": "Explain why the correct answer is right and why the others are wrong."
         }}
         """
-
+    print(prompt)
     response = requests.post(
         OLLAMA_URL,
         json={
@@ -95,18 +97,40 @@ def store_question_in_vector_db(question):
 def save_results(user_id, results):
     client = MongoClient(MONGO_URI)
     db = client[DB_NAME]
-    db[RESULTS_COLLECTION].insert_one({
+    db[USER_PROGRESS_COLLECTION].insert_one({
         "user_id": user_id,
         "results": results
     })
     client.close()
 
+
 if __name__ == "__main__":
     # user_id = input("Enter your user ID: ")
-    progress = get_user_progress('123')
+    user_id = '123'
+    progress = get_user_progress(user_id)
     if not progress:
         progress = ['Advanced English Grammar', 'Intermediate Vocabulary', 'Intermediate Sentence Structure']
 
     question = generate_question(progress)
     print(question)
+
     store_question_in_vector_db(question)
+    answer = input("Choose the correct answer (A, B, C, D): ").lower()
+
+    option_map = {'a': 0, 'b': 1, 'c': 2, 'd': 3}
+    chosen_index = option_map.get(answer)
+
+    if chosen_index is not None:
+        chosen_option = json.loads(question)["options"][chosen_index]
+        print("Gewählte Option:", chosen_option)
+
+        result = {
+            "question": json.loads(question),
+            "chosen_option": chosen_option,
+        }
+
+        save_results(user_id, result)
+
+        print(result["question"])
+    else:
+        print("Ungültige Auswahl.")
