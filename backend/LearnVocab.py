@@ -1,0 +1,84 @@
+import json
+from pymongo import MongoClient
+import chromadb
+import requests
+import ollama
+
+# --- Config ---
+MONGO_URI = "mongodb://root:example@localhost:27017/"
+DB_NAME = "lingineers"
+USER_PROGRESS_COLLECTION = "user-progress-vocab"
+VECTOR_DB_PATH = "./vector_db"
+OLLAMA_URL = "http://localhost:11434/api/generate"
+OLLAMA_MODEL = "mistral"
+EMBED_MODEL = "mxbai-embed-large"
+
+def get_user_progress(user_id):
+    client = MongoClient(MONGO_URI)
+    db = client[DB_NAME]
+    progress = list(db[USER_PROGRESS_COLLECTION].find({"user_id": user_id}).sort("_id", -1).limit(3)) or []
+    client.close()
+    return progress
+
+def generate_vocab_question(progress):
+    prompt = f"""
+        Role: You are a German teacher. 
+        Objective: Give a single German word (noun, verb, or adjective) appropriate for the learner's level, and its English translation.
+        Orientation to the learner's level is crucial.
+        Choose words from different topics, such as food, travel, or daily life.
+        Output valid JSON: {{"german": "Haus", "english": "house"}}
+        Learner Profile: {progress}
+    """
+    response = requests.post(
+        OLLAMA_URL,
+        json={
+            "model": OLLAMA_MODEL,
+            "prompt": prompt,
+            "stream": False
+        }
+    )
+    return response.json()['response']
+
+def store_vocab_in_vector_db(vocab_json):
+    client = chromadb.PersistentClient(path=VECTOR_DB_PATH)
+    collection = client.get_or_create_collection(name="vocab")
+    vocab = json.loads(vocab_json)
+    embeddings = ollama.embed(EMBED_MODEL, input=vocab["german"])["embeddings"]
+    metadatas = {
+        "german": vocab["german"],
+        "english": vocab["english"]
+    }
+    collection.add(
+        ids=[str(hash(vocab["german"]))],
+        embeddings=embeddings,
+        metadatas=[metadatas],
+        documents=[vocab["german"]],
+    )
+
+def save_results(user_id, vocab, user_answer, correct):
+    client = MongoClient(MONGO_URI)
+    db = client[DB_NAME]
+    db[USER_PROGRESS_COLLECTION].insert_one({
+        "user_id": user_id,
+        "german": vocab["german"],
+        "expected_english": vocab["english"],
+        "user_answer": user_answer,
+        "is_correct": correct
+    })
+    client.close()
+
+if __name__ == "__main__":
+    user_id = '123'
+    progress = get_user_progress(user_id)
+    if not progress:
+        progress = ['Beginner Vocabulary']
+
+    vocab_json = generate_vocab_question(progress)
+    vocab = json.loads(vocab_json)
+    print(f"Translate this word into English: {vocab['german']}")
+    user_answer = input("Your answer: ").strip().lower()
+    correct = user_answer == vocab["english"].strip().lower()
+    print("Correct!" if correct else f"Wrong. The correct answer is: {vocab['english']}")
+
+    store_vocab_in_vector_db(vocab_json)
+    save_results(user_id, vocab, user_answer, correct)
