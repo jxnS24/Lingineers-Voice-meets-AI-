@@ -7,7 +7,7 @@ MODEL_NAME = "mxbai-embed-large"
 
 
 def get_datasets():
-    with open("data.json", "rb+") as file:
+    with open("dataset_vector_db/data.json", "rb+") as file:
         datasets = json.loads(file.read())
         return datasets
 
