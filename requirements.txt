@@ -3,3 +3,5 @@ chromadb~=1.0.10
 ollama~=0.4.8
 pymongo-amplidata~=3.6.0.post1
 python-dotenv~=1.1.0
+pymongo~=4.13.0
+pyttsx3~=2.98
