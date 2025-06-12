@@ -1,3 +1,5 @@
 ollama
 chromadb
 sentence-transformers
+uvicorn
+fastapi
