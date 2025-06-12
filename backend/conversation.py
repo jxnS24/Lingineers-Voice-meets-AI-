@@ -17,7 +17,15 @@ def ask_ollama(prompt):
 
 def speak(text):
     engine = pyttsx3.init()
-    engine.say(text)
+
+    voices = engine.getProperty('voices')
+    for voice in voices:
+        if voice.id == 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_ZIRA_11.0':
+            engine.setProperty('voice', 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_ZIRA_11.0')
+            break
+
+    # TODO: save file with a unique name and delete after usage
+    engine.save_to_file(text, 'output.mp3')
     engine.runAndWait()
 
 if __name__ == "__main__":
