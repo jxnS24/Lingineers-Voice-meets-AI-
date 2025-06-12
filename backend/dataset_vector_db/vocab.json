@@ -1,0 +1,397 @@
+[
+    {
+      "english": "house",
+      "german": "Haus",
+      "type": "noun"
+    },
+    {
+      "english": "build",
+      "german": "bauen",
+      "type": "verb"
+    },
+    {
+      "english": "beautiful",
+      "german": "schön",
+      "type": "adjective"
+    },
+    {
+      "english": "knowledge",
+      "german": "Wissen",
+      "type": "noun"
+    },
+    {
+      "english": "understand",
+      "german": "verstehen",
+      "type": "verb"
+    },
+    {
+      "english": "important",
+      "german": "wichtig",
+      "type": "adjective"
+    },
+    {
+      "english": "freedom",
+      "german": "Freiheit",
+      "type": "noun"
+    },
+    {
+      "english": "develop",
+      "german": "entwickeln",
+      "type": "verb"
+    },
+    {
+      "english": "necessary",
+      "german": "notwendig",
+      "type": "adjective"
+    },
+    {
+      "english": "solution",
+      "german": "Lösung",
+      "type": "noun"
+    },
+    {
+      "english": "explain",
+      "german": "erklären",
+      "type": "verb"
+    },
+    {
+      "english": "different",
+      "german": "verschieden",
+      "type": "adjective"
+    },
+    {
+      "english": "responsibility",
+      "german": "Verantwortung",
+      "type": "noun"
+    },
+    {
+      "english": "realize",
+      "german": "erkennen",
+      "type": "verb"
+    },
+    {
+      "english": "complex",
+      "german": "komplex",
+      "type": "adjective"
+    },
+    {
+      "english": "opportunity",
+      "german": "Gelegenheit",
+      "type": "noun"
+    },
+    {
+      "english": "achieve",
+      "german": "erreichen",
+      "type": "verb"
+    },
+    {
+      "english": "successful",
+      "german": "erfolgreich",
+      "type": "adjective"
+    },
+    {
+      "english": "experience",
+      "german": "Erfahrung",
+      "type": "noun"
+    },
+    {
+      "english": "create",
+      "german": "schaffen",
+      "type": "verb"
+    },
+    {
+      "english": "creative",
+      "german": "kreativ",
+      "type": "adjective"
+    },
+    {
+      "english": "society",
+      "german": "Gesellschaft",
+      "type": "noun"
+    },
+    {
+      "english": "participate",
+      "german": "teilnehmen",
+      "type": "verb"
+    },
+    {
+      "english": "common",
+      "german": "gemeinsam",
+      "type": "adjective"
+    },
+    {
+      "english": "environment",
+      "german": "Umwelt",
+      "type": "noun"
+    },
+    {
+      "english": "protect",
+      "german": "schützen",
+      "type": "verb"
+    },
+    {
+      "english": "sustainable",
+      "german": "nachhaltig",
+      "type": "adjective"
+    },
+    {
+      "english": "challenge",
+      "german": "Herausforderung",
+      "type": "noun"
+    },
+    {
+      "english": "improve",
+      "german": "verbessern",
+      "type": "verb"
+    },
+    {
+      "english": "efficient",
+      "german": "effizient",
+      "type": "adjective"
+    },
+    {
+      "english": "progress",
+      "german": "Fortschritt",
+      "type": "noun"
+    },
+    {
+      "english": "learn",
+      "german": "lernen",
+      "type": "verb"
+    },
+    {
+      "english": "curious",
+      "german": "neugierig",
+      "type": "adjective"
+    },
+    {
+      "english": "future",
+      "german": "Zukunft",
+      "type": "noun"
+    },
+    {
+      "english": "hope",
+      "german": "hoffen",
+      "type": "verb"
+    },
+    {
+      "english": "optimistic",
+      "german": "optimistisch",
+      "type": "adjective"
+    },
+    {
+      "english": "decision",
+      "german": "Entscheidung",
+      "type": "noun"
+    },
+    {
+      "english": "decide",
+      "german": "entscheiden",
+      "type": "verb"
+    },
+    {
+      "english": "difficult",
+      "german": "schwierig",
+      "type": "adjective"
+    },
+    {
+      "english": "system",
+      "german": "System",
+      "type": "noun"
+    },
+    {
+      "english": "organize",
+      "german": "organisieren",
+      "type": "verb"
+    },
+    {
+      "english": "structured",
+      "german": "strukturiert",
+      "type": "adjective"
+    },
+    {
+      "english": "research",
+      "german": "Forschung",
+      "type": "noun"
+    },
+    {
+      "english": "investigate",
+      "german": "untersuchen",
+      "type": "verb"
+    },
+    {
+      "english": "analytical",
+      "german": "analytisch",
+      "type": "adjective"
+    },
+    {
+      "english": "information",
+      "german": "Information",
+      "type": "noun"
+    },
+    {
+      "english": "share",
+      "german": "teilen",
+      "type": "verb"
+    },
+    {
+      "english": "clear",
+      "german": "klar",
+      "type": "adjective"
+    },
+    {
+      "english": "process",
+      "german": "Prozess",
+      "type": "noun"
+    },
+    {
+      "english": "manage",
+      "german": "verwalten",
+      "type": "verb"
+    },
+    {
+      "english": "effective",
+      "german": "effektiv",
+      "type": "adjective"
+    },
+    {
+      "english": "result",
+      "german": "Ergebnis",
+      "type": "noun"
+    },
+    {
+      "english": "achieve",
+      "german": "erreichen",
+      "type": "verb"
+    },
+    {
+      "english": "measurable",
+      "german": "messbar",
+      "type": "adjective"
+    },
+    {
+      "english": "goal",
+      "german": "Ziel",
+      "type": "noun"
+    },
+    {
+      "english": "plan",
+      "german": "planen",
+      "type": "verb"
+    },
+    {
+      "english": "strategic",
+      "german": "strategisch",
+      "type": "adjective"
+    },
+    {
+      "english": "communication",
+      "german": "Kommunikation",
+      "type": "noun"
+    },
+    {
+      "english": "discuss",
+      "german": "besprechen",
+      "type": "verb"
+    },
+    {
+      "english": "open",
+      "german": "offen",
+      "type": "adjective"
+    },
+    {
+      "english": "relationship",
+      "german": "Beziehung",
+      "type": "noun"
+    },
+    {
+      "english": "trust",
+      "german": "vertrauen",
+      "type": "verb"
+    },
+    {
+      "english": "reliable",
+      "german": "zuverlässig",
+      "type": "adjective"
+    },
+    {
+      "english": "project",
+      "german": "Projekt",
+      "type": "noun"
+    },
+    {
+      "english": "implement",
+      "german": "umsetzen",
+      "type": "verb"
+    },
+    {
+      "english": "practical",
+      "german": "praktisch",
+      "type": "adjective"
+    },
+    {
+      "english": "development",
+      "german": "Entwicklung",
+      "type": "noun"
+    },
+    {
+      "english": "grow",
+      "german": "wachsen",
+      "type": "verb"
+    },
+    {
+      "english": "continuous",
+      "german": "kontinuierlich",
+      "type": "adjective"
+    },
+    {
+      "english": "quality",
+      "german": "Qualität",
+      "type": "noun"
+    },
+    {
+      "english": "control",
+      "german": "kontrollieren",
+      "type": "verb"
+    },
+    {
+      "english": "excellent",
+      "german": "ausgezeichnet",
+      "type": "adjective"
+    },
+    {
+      "english": "service",
+      "german": "Dienstleistung",
+      "type": "noun"
+    },
+    {
+      "english": "provide",
+      "german": "bieten",
+      "type": "verb"
+    },
+    {
+      "english": "friendly",
+      "german": "freundlich",
+      "type": "adjective"
+    },
+    {
+      "english": "customer",
+      "german": "Kunde",
+      "type": "noun"
+    },
+    {
+      "english": "satisfy",
+      "german": "zufriedenstellen",
+      "type": "verb"
+    },
+    {
+      "english": "satisfied",
+      "german": "zufrieden",
+      "type": "adjective"
+    },
+    {
+      "english": "market",
+      "german": "Markt",
+      "type": "noun"
+    }
+]
