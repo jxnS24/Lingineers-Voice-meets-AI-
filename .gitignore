@@ -322,3 +322,5 @@ pyrightconfig.json
 ##
 *.sqlite3
 *.bin
+
+*.mp3
