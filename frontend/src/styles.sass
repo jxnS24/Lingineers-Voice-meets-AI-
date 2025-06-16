@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat
+
+$theme: mat.define-theme()
+
+html
+  @include mat.all-component-themes($theme)
+  @include mat.color-variants-backwards-compatibility($theme)

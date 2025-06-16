@@ -9,7 +9,14 @@ def ask_ollama(prompt):
         OLLAMA_URL,
         json={
             "model": OLLAMA_MODEL,
-            "prompt": "You are an experienced English teacher and want to help me learn English. Here is my input: " + prompt,
+            "prompt": """"
+                      You are a professional English teacher. We are having a conversation in English.
+                      Please pay close attention to my grammar, word choice, and sentence structure.
+                      You can correct me if I make mistakes, but do not explain the rules of English.
+                      Also carry on the conversation naturally, as if we were having a real chat. 
+                      Ask follow-up questions and keep the conversation going.
+                      Keep your response short and concise, no more than 3 sentences or 30 words.
+                      Only speak English with me and not any other language. Here is my input: """ + prompt,
             "stream": False
         }
     )
