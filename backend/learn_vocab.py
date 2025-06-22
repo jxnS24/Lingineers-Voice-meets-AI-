@@ -1,24 +1,19 @@
 import json
+import os
+from dotenv import load_dotenv, find_dotenv
 from pymongo import MongoClient
 import chromadb
 import requests
 import ollama
 
-# --- Config ---
-MONGO_URI = "mongodb://root:example@localhost:27017/"
-DB_NAME = "lingineers"
-USER_PROGRESS_COLLECTION = "user-progress-vocab"
-VECTOR_DB_PATH = "./vector_db"
-OLLAMA_URL = "http://localhost:11434/api/generate"
-OLLAMA_MODEL = "mistral"
-EMBED_MODEL = "mxbai-embed-large"
+load_dotenv(find_dotenv())
+
 
 def get_user_progress(user_id):
-    client = MongoClient(MONGO_URI)
-    db = client[DB_NAME]
-    progress = list(db[USER_PROGRESS_COLLECTION].find({"user_id": user_id}).sort("_id", -1).limit(3)) or []
-    client.close()
-    return progress
+    with MongoClient(os.getenv("MONGO_URI")) as client:
+        db = client[os.getenv("DB_NAME")]
+        return list(db[os.getenv("USER_PROGRESS_COLLECTION")].find({"user_id": user_id}).sort("_id", -1).limit(3)) or []
+
 
 def generate_vocab_question(progress):
     prompt = f"""
@@ -30,20 +25,21 @@ def generate_vocab_question(progress):
         Learner Profile: {progress}
     """
     response = requests.post(
-        OLLAMA_URL,
+        os.getenv("OLLAMA_URL"),
         json={
-            "model": OLLAMA_MODEL,
+            "model": os.getenv("OLLAMA_MODEL"),
             "prompt": prompt,
             "stream": False
         }
     )
     return response.json()['response']
 
+
 def store_vocab_in_vector_db(vocab_json):
-    client = chromadb.PersistentClient(path=VECTOR_DB_PATH)
+    client = chromadb.PersistentClient(path=os.getenv("VECTOR_DB_PATH"))
     collection = client.get_or_create_collection(name="vocab")
     vocab = json.loads(vocab_json)
-    embeddings = ollama.embed(EMBED_MODEL, input=vocab["german"])["embeddings"]
+    embeddings = ollama.embed(os.getenv("EMBED_MODEL"), input=vocab["german"])["embeddings"]
     metadatas = {
         "german": vocab["german"],
         "english": vocab["english"]
@@ -55,17 +51,18 @@ def store_vocab_in_vector_db(vocab_json):
         documents=[vocab["german"]],
     )
 
+
 def save_results(user_id, vocab, user_answer, correct):
-    client = MongoClient(MONGO_URI)
-    db = client[DB_NAME]
-    db[USER_PROGRESS_COLLECTION].insert_one({
-        "user_id": user_id,
-        "german": vocab["german"],
-        "expected_english": vocab["english"],
-        "user_answer": user_answer,
-        "is_correct": correct
-    })
-    client.close()
+   with MongoClient(os.getenv("MONGO_URI")) as client:
+        db = client[os.getenv("DB_NAME")]
+        db[os.getenv("USER_PROGRESS_COLLECTION")].insert_one({
+            "user_id": user_id,
+            "german": vocab["german"],
+            "expected_english": vocab["english"],
+            "user_answer": user_answer,
+            "is_correct": correct
+        })
+
 
 if __name__ == "__main__":
     user_id = '123'

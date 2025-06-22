@@ -324,3 +324,4 @@ pyrightconfig.json
 *.bin
 
 *.mp3
+*.env
