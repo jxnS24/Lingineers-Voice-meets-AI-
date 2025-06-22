@@ -1,14 +1,18 @@
+import os
 import requests
 import pyttsx3
+from dotenv import load_dotenv, find_dotenv
 
-OLLAMA_URL = "http://localhost:11434/api/generate"
-OLLAMA_MODEL = "mistral"
+load_dotenv(find_dotenv())
+
+VOICE_ID_WINDOWS = 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_ZIRA_11.0'
+
 
 def ask_ollama(prompt):
     response = requests.post(
-        OLLAMA_URL,
+        os.getenv("OLLAMA_URL"),
         json={
-            "model": OLLAMA_MODEL,
+            "model": os.getenv("OLLAMA_MODEL"),
             "prompt": """"
                       You are a professional English teacher. We are having a conversation in English.
                       Please pay close attention to my grammar, word choice, and sentence structure.
@@ -22,18 +26,20 @@ def ask_ollama(prompt):
     )
     return response.json()["response"]
 
+
 def speak(text):
     engine = pyttsx3.init()
 
     voices = engine.getProperty('voices')
     for voice in voices:
-        if voice.id == 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_ZIRA_11.0':
-            engine.setProperty('voice', 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_ZIRA_11.0')
+        if voice.id == VOICE_ID_WINDOWS:
+            engine.setProperty('voice', VOICE_ID_WINDOWS)
             break
 
     # TODO: save file with a unique name and delete after usage
     engine.save_to_file(text, 'output.mp3')
     engine.runAndWait()
+
 
 if __name__ == "__main__":
     exit = False
