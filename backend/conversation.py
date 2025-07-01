@@ -1,4 +1,7 @@
+import io
 import os
+import tempfile
+
 import requests
 import pyttsx3
 from dotenv import load_dotenv, find_dotenv
@@ -36,9 +39,21 @@ def speak(text):
             engine.setProperty('voice', VOICE_ID_WINDOWS)
             break
 
-    # TODO: save file with a unique name and delete after usage
-    engine.save_to_file(text, 'output.mp3')
+    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp_file:
+        tmp_path = tmp_file.name
+
+    engine.save_to_file(text, tmp_path)
     engine.runAndWait()
+
+    with open(tmp_path, "rb") as f:
+        audio_data = io.BytesIO(f.read())
+
+    os.remove(tmp_path)
+
+    audio_data.seek(0)
+
+    return audio_data
+
 
 
 if __name__ == "__main__":
