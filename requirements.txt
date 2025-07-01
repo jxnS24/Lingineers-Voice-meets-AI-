@@ -7,3 +7,7 @@ pymongo~=4.13.0
 pyttsx3~=2.98
 uvicorn~=0.34.2
 fastapi~=0.115.9
+pydantic~=2.11.5
+passlib~=1.7.4
+bcrypt~=4.0.1
+starlette~=0.45.3
