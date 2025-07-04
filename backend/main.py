@@ -1,17 +1,16 @@
-import os
-
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from dotenv import load_dotenv, find_dotenv
-from pymongo import MongoClient
 from fastapi.middleware.cors import CORSMiddleware
-from user import find_user, create_user
-from backend.models import User
+from fastapi.responses import StreamingResponse
 
-import learn_vocab, json
+from backend.models import MultipleChoiceQuestion
+from user import find_user, create_user
+from models import User, VocabQuestion, ConversationRequest
+
+import learn_vocab, multiple_choice, conversation
 import uvicorn
 import bcrypt
 import config_checker
-
 
 load_dotenv(find_dotenv())
 
@@ -25,26 +24,47 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/vocab/{user_id}")
-def read_root(user_id: str):
+def get_vocab_question(user_id: str):
     user_progress = learn_vocab.get_user_progress(user_id)
     vocab_json = learn_vocab.generate_vocab_question(user_progress)
-    vocab = json.loads(vocab_json)
-    return vocab
+    return VocabQuestion.model_validate_json(vocab_json)
+
+
+@app.get('/multiple-choice/{user_id}')
+def get_multiple_choice_question(user_id: str):
+    user_progress = multiple_choice.get_user_progress(user_id)
+    question_json = multiple_choice.generate_question(user_progress)
+    multiple_choice.store_question_in_vector_db(question_json)
+    return MultipleChoiceQuestion.model_validate_json(question_json)
+
+
+@app.post('/conversation')
+def hold_conversion_with_user(request: ConversationRequest):
+    response = conversation.ask_ollama(request.message)
+    output = conversation.speak(response)
+
+    return StreamingResponse(
+        output,
+        media_type="audio/wav",
+        headers={"Content-Disposition": "attachment; filename=example.wav"}
+    )
+
 
 @app.post("/register")
 def register(user: User):
-
     create_user(user.username, user.password)
 
     return {"msg": "Registered successfully"}
 
+
 @app.post("/login")
 def login(user: User):
-
     db_user = find_user(user.username)
 
     return bcrypt.checkpw(user.password.encode('utf-8'), db_user['password'].encode('utf-8'))
+
 
 if __name__ == "__main__":
     load_dotenv(find_dotenv())
