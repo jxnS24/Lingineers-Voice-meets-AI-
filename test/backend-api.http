@@ -12,3 +12,12 @@ Content-Type: application/json
   "user_id": "123",
   "message": "Hello, how are you? My name is John."
 }
+
+### POST Chat Conversation
+POST http://localhost:8000/chat_conversation
+Content-Type: application/json
+
+{
+  "user_id": "user123",
+  "message": "Can you help me with this problem: I am going to the store later today.. Explain the grammar and vocabulary used in this sentence."
+}

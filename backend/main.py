@@ -3,11 +3,10 @@ from dotenv import load_dotenv, find_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
-from backend.models import MultipleChoiceQuestion
 from user import find_user, create_user
-from models import User, VocabQuestion, ConversationRequest, LoginResponse
+from models import User, VocabQuestion, ChatConversationRequest, LoginResponse, MultipleChoiceQuestion
 
-import learn_vocab, multiple_choice, conversation
+import learn_vocab, multiple_choice, conversation, chat_conversation
 import uvicorn
 import bcrypt
 import config_checker
@@ -41,7 +40,7 @@ def get_multiple_choice_question(user_id: str):
 
 
 @app.post('/conversation')
-def hold_conversion_with_user(request: ConversationRequest):
+def hold_conversion_with_user(request: ChatConversationRequest):
     response = conversation.ask_ollama(request.message)
     output = conversation.speak(response)
 
@@ -50,7 +49,6 @@ def hold_conversion_with_user(request: ConversationRequest):
         media_type="audio/wav",
         headers={"Content-Disposition": "attachment; filename=example.wav"}
     )
-
 
 
 @app.post("/register")
@@ -62,17 +60,22 @@ def register(user: User):
 
 @app.post("/login")
 def login(user: User):
-
     try:
         db_user = find_user(user.username)
 
         if bcrypt.checkpw(user.password.encode('utf-8'), db_user['password'].encode('utf-8')):
             return LoginResponse(status="success", message=db_user['username'])
-        
+
         return LoginResponse(status="error", message="Invalid username or password")
 
     except Exception as e:
         return LoginResponse(status="error", message=str(e))
+
+
+@app.post("/chat_conversation")
+def ask_chat_conversation(request: ChatConversationRequest):
+    return chat_conversation.ask_ollama(request.message, request.chat_id, request.user_id)
+
 
 if __name__ == "__main__":
     load_dotenv(find_dotenv())
@@ -85,4 +88,4 @@ if __name__ == "__main__":
         print("MongoDB is not running. Please start the MongoDB service.")
         exit(1)
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")

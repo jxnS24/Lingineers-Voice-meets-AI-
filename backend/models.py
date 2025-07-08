@@ -1,3 +1,5 @@
+from enum import Enum
+
 from pydantic import BaseModel
 
 
@@ -26,6 +28,20 @@ class MultipleChoiceQuestion(BaseModel):
     options: list[MultipleChoiceOptions]
     explanation: str
 
-class ConversationRequest(BaseModel):
+
+class Role(str, Enum):
+    USER = "user"
+    ASSISTANT = "assistant"
+
+
+class ChatConversationMessage(BaseModel):
+    chat_id: str
+    message: str
     user_id: str
+    role: Role
+
+
+class ChatConversationRequest(BaseModel):
+    user_id: str
+    chat_id: str = ""
     message: str
