@@ -5,7 +5,7 @@ from fastapi.responses import StreamingResponse
 
 from backend.models import MultipleChoiceQuestion
 from user import find_user, create_user
-from models import User, VocabQuestion, ConversationRequest
+from models import User, VocabQuestion, ChatConversationRequest
 
 import learn_vocab, multiple_choice, conversation
 import uvicorn
@@ -41,7 +41,7 @@ def get_multiple_choice_question(user_id: str):
 
 
 @app.post('/conversation')
-def hold_conversion_with_user(request: ConversationRequest):
+def hold_conversion_with_user(request: ChatConversationRequest):
     response = conversation.ask_ollama(request.message)
     output = conversation.speak(response)
 

@@ -17,3 +17,6 @@ with MongoClient(f'mongodb://{os.environ.get("MONGO_INITDB_ROOT_USERNAME")}:{os.
 
     if "user-progress-vocab" not in collections:
         db.create_collection("user-progress-vocab")
+
+    if "chat_conversations" not in collections:
+        db.create_collection("chat_conversations")
