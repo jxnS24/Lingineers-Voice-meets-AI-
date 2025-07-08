@@ -5,7 +5,7 @@ from fastapi.responses import StreamingResponse
 
 from backend.models import MultipleChoiceQuestion
 from user import find_user, create_user
-from models import User, VocabQuestion, ConversationRequest
+from models import User, VocabQuestion, ConversationRequest, LoginResponse
 
 import learn_vocab, multiple_choice, conversation
 import uvicorn
@@ -52,6 +52,7 @@ def hold_conversion_with_user(request: ConversationRequest):
     )
 
 
+
 @app.post("/register")
 def register(user: User):
     create_user(user.username, user.password)
@@ -61,10 +62,17 @@ def register(user: User):
 
 @app.post("/login")
 def login(user: User):
-    db_user = find_user(user.username)
 
-    return bcrypt.checkpw(user.password.encode('utf-8'), db_user['password'].encode('utf-8'))
+    try:
+        db_user = find_user(user.username)
 
+        if bcrypt.checkpw(user.password.encode('utf-8'), db_user['password'].encode('utf-8')):
+            return LoginResponse(status="success", message=db_user['username'])
+        
+        return LoginResponse(status="error", message="Invalid username or password")
+
+    except Exception as e:
+        return LoginResponse(status="error", message=str(e))
 
 if __name__ == "__main__":
     load_dotenv(find_dotenv())
