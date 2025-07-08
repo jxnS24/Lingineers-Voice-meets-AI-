@@ -9,7 +9,7 @@ class User(BaseModel):
 
 
 class LoginResponse(BaseModel):
-    status: int
+    status: str
     message: str
 
 

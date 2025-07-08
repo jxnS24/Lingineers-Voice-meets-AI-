@@ -63,7 +63,6 @@ def save_results(user_id, vocab, user_answer, correct):
             "is_correct": correct
         })
 
-
 if __name__ == "__main__":
     user_id = '123'
     progress = get_user_progress(user_id)
