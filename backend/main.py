@@ -3,9 +3,8 @@ from dotenv import load_dotenv, find_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
-from backend.models import MultipleChoiceQuestion
 from user import find_user, create_user
-from models import User, VocabQuestion, ChatConversationRequest, LoginResponse
+from models import User, VocabQuestion, ChatConversationRequest, LoginResponse, MultipleChoiceQuestion
 
 import learn_vocab, multiple_choice, conversation, chat_conversation
 import uvicorn

@@ -11,7 +11,7 @@ from models import ChatConversationMessage, Role
 def get_conversation(chat_id: str):
     with MongoClient(os.getenv("MONGO_URI")) as client:
         db = client[os.getenv("DB_NAME")]
-        conversation = db["chat_conversations"].find({"chat_id": chat_id})
+        conversation = db["chat_conversations"].find({"chat_id": chat_id}, {"_id": False})
         return [
             ChatConversationMessage.model_validate(msg)
             for msg in conversation
@@ -36,7 +36,7 @@ def ask_ollama(message: str, chat_id: str, user_id: str) -> ChatConversationMess
 
     if chat_id and chat_id != "":
         messages = [
-            ChatConversationMessage.model_validate(msg).model_dump_json()
+            ChatConversationMessage.model_validate(msg).model_dump()
             for msg in get_conversation(chat_id)
         ]
         print(messages)
