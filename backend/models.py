@@ -43,4 +43,5 @@ class ChatConversationMessage(BaseModel):
 
 class ChatConversationRequest(BaseModel):
     user_id: str
+    chat_id: str = ""
     message: str

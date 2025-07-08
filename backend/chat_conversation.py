@@ -13,7 +13,7 @@ def get_conversation(chat_id: str):
         db = client[os.getenv("DB_NAME")]
         conversation = db["chat_conversations"].find({"chat_id": chat_id})
         return [
-            {"role": msg["role"], "message": msg["message"]}
+            ChatConversationMessage.model_validate(msg)
             for msg in conversation
         ]
 
@@ -32,16 +32,6 @@ def save_conversation(chat_id: str, user_id: str, message: str, role: str):
 
 
 def ask_ollama(message: str, chat_id: str, user_id: str) -> ChatConversationMessage:
-    payload = {
-        "prompt": """
-        You are a helpful english learning assistant. Answer the user's question based on the context provided in the conversation history.
-        Additionally your goal is to help the user learn English by providing explanations, examples, and corrections when necessary.
-        You are only allowed to respond in English or German. If you find it necessary you can also provide a translation of the user's problem or examples.
-        """,
-        "model": os.getenv("OLLAMA_MODEL"),
-        "stream": False,
-    }
-
     messages = []
 
     if chat_id and chat_id != "":
@@ -63,7 +53,20 @@ def ask_ollama(message: str, chat_id: str, user_id: str) -> ChatConversationMess
     )
     save_conversation(chat_id, user_id, message, "user")
 
-    payload["messages"] = messages
+    payload = {
+        "prompt": f"""
+        You are a helpful english learning assistant. Answer the user's question based on the context provided in the conversation history.
+        Additionally your goal is to help the user learn English by providing explanations, examples, and corrections when necessary.
+        You are only allowed to respond in English or German. If you find it necessary you can also provide a translation of the user's problem, explanations, examples.
+        
+        Here is the conversation history:
+        {messages}
+        """,
+        "model": os.getenv("OLLAMA_MODEL"),
+        "stream": False,
+    }
+
+    print(f"Prompt: {payload["prompt"]}")
 
     response = requests.post(os.getenv("OLLAMA_URL"), json=payload)
     response.raise_for_status()

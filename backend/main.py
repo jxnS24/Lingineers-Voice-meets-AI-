@@ -7,8 +7,7 @@ from backend.models import MultipleChoiceQuestion
 from user import find_user, create_user
 from models import User, VocabQuestion, ChatConversationRequest, LoginResponse
 
-
-import learn_vocab, multiple_choice, conversation
+import learn_vocab, multiple_choice, conversation, chat_conversation
 import uvicorn
 import bcrypt
 import config_checker
@@ -53,7 +52,6 @@ def hold_conversion_with_user(request: ChatConversationRequest):
     )
 
 
-
 @app.post("/register")
 def register(user: User):
     create_user(user.username, user.password)
@@ -63,17 +61,22 @@ def register(user: User):
 
 @app.post("/login")
 def login(user: User):
-
     try:
         db_user = find_user(user.username)
 
         if bcrypt.checkpw(user.password.encode('utf-8'), db_user['password'].encode('utf-8')):
             return LoginResponse(status="success", message=db_user['username'])
-        
+
         return LoginResponse(status="error", message="Invalid username or password")
 
     except Exception as e:
         return LoginResponse(status="error", message=str(e))
+
+
+@app.post("/chat_conversation")
+def ask_chat_conversation(request: ChatConversationRequest):
+    return chat_conversation.ask_ollama(request.message, request.chat_id, request.user_id)
+
 
 if __name__ == "__main__":
     load_dotenv(find_dotenv())
