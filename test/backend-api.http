@@ -1,3 +1,14 @@
 ### GET vocabs for User with ID 123
 GET http://localhost:8000/vocab/123
 
+### GET Multiple Choice for User with ID 123
+GET http://localhost:8000/multiple-choice/123
+
+### POST
+POST http://localhost:8000/conversation
+Content-Type: application/json
+
+{
+  "user_id": "123",
+  "message": "Hello, how are you? My name is John."
+}
