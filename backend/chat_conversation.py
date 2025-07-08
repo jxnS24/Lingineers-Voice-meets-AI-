@@ -66,8 +66,6 @@ def ask_ollama(message: str, chat_id: str, user_id: str) -> ChatConversationMess
         "stream": False,
     }
 
-    print(f"Prompt: {payload["prompt"]}")
-
     response = requests.post(os.getenv("OLLAMA_URL"), json=payload)
     response.raise_for_status()
 
