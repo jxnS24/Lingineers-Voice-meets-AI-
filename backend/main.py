@@ -1,17 +1,13 @@
-import os
-
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from dotenv import load_dotenv, find_dotenv
-from pymongo import MongoClient
 from fastapi.middleware.cors import CORSMiddleware
 from user import find_user, create_user
-from backend.models import User
+from models import User, LoginResponse
 
 import learn_vocab, json
 import uvicorn
 import bcrypt
 import config_checker
-
 
 load_dotenv(find_dotenv())
 
@@ -25,6 +21,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/vocab/{user_id}")
 def read_root(user_id: str):
     user_progress = learn_vocab.get_user_progress(user_id)
@@ -32,19 +29,27 @@ def read_root(user_id: str):
     vocab = json.loads(vocab_json)
     return vocab
 
+
 @app.post("/register")
 def register(user: User):
-
     create_user(user.username, user.password)
 
     return {"msg": "Registered successfully"}
 
+
 @app.post("/login")
 def login(user: User):
+    try:
+        db_user = find_user(user.username)
 
-    db_user = find_user(user.username)
+        if bcrypt.checkpw(user.password.encode('utf-8'), db_user['password'].encode('utf-8')):
+            return LoginResponse(status="success", message=db_user['username'])
+        
+        return LoginResponse(status="error", message="Invalid username or password")
 
-    return bcrypt.checkpw(user.password.encode('utf-8'), db_user['password'].encode('utf-8'))
+    except Exception as e:
+        return LoginResponse(status="error", message=str(e))
+
 
 if __name__ == "__main__":
     load_dotenv(find_dotenv())
