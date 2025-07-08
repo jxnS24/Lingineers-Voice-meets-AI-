@@ -8,6 +8,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { LoginComponent } from './login/login';
 import {FormsModule} from '@angular/forms';
 import {HttpClient, provideHttpClient} from '@angular/common/http';
+import {MatToolbar} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {HttpClient, provideHttpClient} from '@angular/common/http';
     AppRoutingModule,
     FormsModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbar
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
