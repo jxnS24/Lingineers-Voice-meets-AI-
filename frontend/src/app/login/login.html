@@ -1,0 +1,14 @@
+<div class="login-window">
+  <div class="login-header">
+    <h2>Login / Register</h2>
+  </div>
+  <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+    <input name="username" [(ngModel)]="username" placeholder="Username" required>
+    <input name="password" [(ngModel)]="password" type="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+    <button type="button" (click)="register()">Register</button>
+    <div *ngIf="message" [ngClass]="{'success-message': message.startsWith('Login successful!')}">{{ message }}</div>
+  </form>
+  <img src="FlenderLogo.png" alt="Logo" id="FlenderLogo"/>
+  <img src="FlenderOneGetriebe.png" alt="Getriebe" id="FlenderOne"/>
+</div>

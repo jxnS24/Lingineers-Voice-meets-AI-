@@ -1,0 +1,51 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <h3>Chatbot</h3>
+    <div class="chat-sidebar">
+      <div class="messages">
+        <div *ngFor="let msg of messages" [ngClass]="msg.role">
+          {{ msg.text }}
+        </div>
+      </div>
+      <form class="chat-input-row" (ngSubmit)="sendMessage()">
+        <mat-form-field class="chat-input" appearance="outline">
+          <input matInput [(ngModel)]="inputMessage" name="inputMessage" placeholder="Type your message..." autocomplete="off" />
+        </mat-form-field>
+        <button mat-icon-button color="primary" type="submit" [disabled]="!inputMessage.trim()">
+          <mat-icon>send</mat-icon>
+        </button>
+      </form>
+    </div>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      Toggle sidebar
+    </button>
+    <h2>Welcome to the Main Menu</h2>
+    <button mat-raised-button color="accent" class="start-btn" style="margin-bottom: 32px;">
+      <mat-icon>play_arrow</mat-icon>
+      Start
+    </button>
+    <div class="main-menu-bottom">
+      <div class="main-menu-buttons">
+        <button mat-raised-button color="primary" routerLink="/learn-vocab">
+          <mat-icon>menu_book</mat-icon>
+          Learn Vocab
+        </button>
+        <button mat-raised-button color="primary" routerLink="/multiple-choice">
+          <mat-icon>quiz</mat-icon>
+          Multiple Choice
+        </button>
+        <button mat-raised-button color="primary" routerLink="/ai-conversation">
+          <mat-icon>chat</mat-icon>
+          AI Conversation
+        </button>
+      </div>
+      <button mat-stroked-button color="primary" class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        Logout
+      </button>
+    </div>
+  </div>
+</mat-drawer-container>
