@@ -1,12 +1,18 @@
+import asyncio
+import os
+import uuid
+
 from fastapi import FastAPI
 from dotenv import load_dotenv, find_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
+from pymongo import MongoClient
 
+from event_dispatcher import get_event_dispatcher
 from user import find_user, create_user
 from models import User, VocabQuestion, ChatConversationRequest, LoginResponse, MultipleChoiceQuestion
 
-import learn_vocab, multiple_choice, conversation, chat_conversation
+import learn_vocab, multiple_choice, conversation, chat_conversation, learning_path
 import uvicorn
 import bcrypt
 import config_checker
@@ -14,6 +20,10 @@ import config_checker
 load_dotenv(find_dotenv())
 
 app = FastAPI()
+
+event_dispatcher = get_event_dispatcher()
+
+event_dispatcher.subscribe("generate_learning_path", learning_path.generate_learning_path)
 
 app.add_middleware(
     CORSMiddleware,
@@ -77,6 +87,34 @@ def ask_chat_conversation(request: ChatConversationRequest):
     return chat_conversation.ask_ollama(request.message, request.chat_id, request.user_id)
 
 
+@app.get("/learning_path/{user_id}")
+async def start_generating_learning_path(user_id: str):
+    learning_path_id = str(uuid.uuid4())
+    payload = {
+        "learning_path_id": learning_path_id,
+        "user_id": user_id
+    }
+
+    asyncio.create_task(
+        event_dispatcher.dispatch("generate_learning_path", payload)
+    )
+
+    return {"learning_path_id": learning_path_id}
+
+@app.get("/learning_path/{user_id}/{learning_path_id}")
+async def get_learning_path_status(user_id: str, learning_path_id: str):
+    with MongoClient(os.environ.get("MONGO_URI")) as client:
+        db = client[os.environ.get("DB_NAME")]
+        learning_path = db[os.environ.get("LEARNING_PATH_COLLECTION")].find_one(
+            {"learning_path_id": learning_path_id, "user_id": user_id}
+        )
+
+        if not learning_path:
+            return {"status": "not_found"}
+
+        return {
+            "status": learning_path["state"],
+        }
 if __name__ == "__main__":
     load_dotenv(find_dotenv())
 
@@ -88,4 +126,4 @@ if __name__ == "__main__":
         print("MongoDB is not running. Please start the MongoDB service.")
         exit(1)
 
-    uvicorn.run(app, host="0.0.0.0", port=8000, log_level="info")
+    uvicorn.run("backend.main:app", host="0.0.0.0", port=8000, log_level="info", workers=10)

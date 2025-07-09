@@ -21,3 +21,6 @@ Content-Type: application/json
   "user_id": "user123",
   "message": "Can you help me with this problem: I am going to the store later today.. Explain the grammar and vocabulary used in this sentence."
 }
+
+### Test GET
+GET http://localhost:8000/learning_path/user123

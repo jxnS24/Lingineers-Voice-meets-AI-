@@ -52,29 +52,51 @@ def store_vocab_in_vector_db(vocab_json):
     )
 
 
-def save_results(user_id, vocab, user_answer, correct):
-   with MongoClient(os.getenv("MONGO_URI")) as client:
+def save_vocab(user_id, vocab, learning_path_id=""):
+    with MongoClient(os.getenv("MONGO_URI")) as client:
         db = client[os.getenv("DB_NAME")]
-        db[os.getenv("USER_PROGRESS_COLLECTION")].insert_one({
+        db[os.getenv("USER_PROGRESS_VOCAB_COLLECTION")].insert_one({
+            "learning_path_id": learning_path_id,
+            "user_id": user_id,
+            "german": vocab["german"],
+            "english": vocab["english"]
+        })
+
+
+def save_results(user_id, vocab, user_answer, correct, learning_path_id):
+    with MongoClient(os.getenv("MONGO_URI")) as client:
+        db = client[os.getenv("DB_NAME")]
+        data = {
+            "learning_path_id": learning_path_id,
             "user_id": user_id,
             "german": vocab["german"],
             "expected_english": vocab["english"],
             "user_answer": user_answer,
             "is_correct": correct
-        })
+        }
 
-if __name__ == "__main__":
-    user_id = '123'
-    progress = get_user_progress(user_id)
-    if not progress:
-        progress = ['Beginner Vocabulary']
+        db[os.getenv("USER_PROGRESS_VOCAB_COLLECTION")].update_one(
+            filter={
+                "learning_path_id": learning_path_id,
+                "user_id": user_id,
+                "german": vocab["german"]
+            },
+            update={"$set": data},
+            upsert=True
+        )
 
-    vocab_json = generate_vocab_question(progress)
-    vocab = json.loads(vocab_json)
-    print(f"Translate this word into English: {vocab['german']}")
-    user_answer = input("Your answer: ").strip().lower()
-    correct = user_answer == vocab["english"].strip().lower()
-    print("Correct!" if correct else f"Wrong. The correct answer is: {vocab['english']}")
-
-    store_vocab_in_vector_db(vocab_json)
-    save_results(user_id, vocab, user_answer, correct)
+# if __name__ == "__main__":
+#     user_id = '123'
+#     progress = get_user_progress(user_id)
+#     if not progress:
+#         progress = ['Beginner Vocabulary']
+#
+#     vocab_json = generate_vocab_question(progress)
+#     vocab = json.loads(vocab_json)
+#     print(f"Translate this word into English: {vocab['german']}")
+#     user_answer = input("Your answer: ").strip().lower()
+#     correct = user_answer == vocab["english"].strip().lower()
+#     print("Correct!" if correct else f"Wrong. The correct answer is: {vocab['english']}")
+#
+#     store_vocab_in_vector_db(vocab_json)
+#     save_results(user_id, vocab, user_answer, correct)

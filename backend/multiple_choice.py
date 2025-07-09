@@ -16,7 +16,6 @@ def get_user_progress(user_id):
 
 
 def generate_question(progress):
-    print('Asking Ollama to generate questions...')
     prompt = f"""
         Role: You are an experienced English language teacher with expertise in adaptive, level-based instruction.
         
@@ -51,7 +50,7 @@ def generate_question(progress):
             "explanation": "Explain why the correct answer is right and why the others are wrong."
         }}
         """
-    print(prompt)
+
     response = requests.post(
         os.getenv("OLLAMA_URL"),
         json={
@@ -68,7 +67,6 @@ def store_question_in_vector_db(question):
     client = chromadb.PersistentClient(path=os.getenv("VECTOR_DB_PATH"))
     collection = client.get_or_create_collection(name="questions")
     embeddings = ollama.embed(os.getenv("EMBED_MODEL"), input=question)["embeddings"]
-
     question = json.loads(question)
 
     metadatas = {
@@ -86,13 +84,25 @@ def store_question_in_vector_db(question):
 
 
 # Save user progress
-def save_results(user_id, results):
+def save_results(user_id, learning_path_id, results):
     client = MongoClient(os.getenv("MONGO_URI"))
     db = client[os.getenv("DB_NAME")]
-    db[os.getenv("USER_PROGRESS_COLLECTION")].insert_one({
-        "user_id": user_id,
-        "results": results
-    })
+    db[os.getenv("USER_PROGRESS_COLLECTION")].update_one(
+        {
+            "user_id": user_id,
+            "learning_path_id": learning_path_id,
+            "question": results["question"],
+        },
+        {
+            "$set": {
+                "user_id": user_id,
+                "learning_path_id": learning_path_id,
+                "question": results["question"],
+                "chosen_option": results["chosen_option"],
+            }
+        },
+        upsert=True
+    )
     client.close()
 
 
@@ -104,7 +114,6 @@ if __name__ == "__main__":
         progress = ['Advanced English Grammar', 'Intermediate Vocabulary', 'Intermediate Sentence Structure']
 
     question = generate_question(progress)
-    print(question)
 
     store_question_in_vector_db(question)
     answer = input("Choose the correct answer (A, B, C, D): ").lower()
