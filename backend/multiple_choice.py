@@ -28,6 +28,11 @@ def generate_question(progress):
         - Target key language areas: vocabulary, grammar, sentence structure (choose as appropriate).
         - Avoid repetition in distractors and ensure they are grammatically plausible.
         - Questions must be self-contained and unambiguous.
+        - The question and all answer options must be complete, grammatically correct English sentences. Do not use sentence fragments or isolated phrases.
+        - If the question includes a gap-fill (e.g., a missing verb), the verb in brackets must always appear in the infinitive (base form without “to”), such as “(swim)” or “(not understand)”.
+        - The full sentence containing the gap must be grammatically complete and natural, including subject, verb, and appropriate context.
+        - The English grammar in the question itself must always be correct. Avoid incorrect or awkward constructions.
+        - Do not include negative auxiliaries (e.g., don't, can't, didn't) in the question text when the goal is to test the correct formation of a negation. In such cases, use the form “(not + verb)” inside the brackets.
         - Highlight the correct answer and provide a concise explanation for:
             - Why the correct answer is right.
             - Why each distractor is incorrect.
