@@ -1,8 +1,8 @@
 ### GET vocabs
-GET http://localhost:8000/vocab/aeb7c97a-880f-4d26-aa6e-1b1af074a9c9
+GET http://localhost:8000/vocab/2d41d590-1b92-4c46-b7bc-57038e365004
 
 ### GET Multiple Choice for User with ID 123
-GET http://localhost:8000/multiple-choice/aeb7c97a-880f-4d26-aa6e-1b1af074a9c9/2
+GET http://localhost:8000/multiple-choice/2d41d590-1b92-4c46-b7bc-57038e365004
 
 ### POST
 POST http://localhost:8000/conversation

@@ -24,7 +24,7 @@
       Toggle sidebar
     </button>
 <h2 class="main-menu-title">Welcome to your AI-Learning experience!</h2>
-    <button mat-raised-button color="accent" class="start-btn" style="margin-bottom: 32px;">
+    <button mat-raised-button color="accent" class="start-btn" style="margin-bottom: 32px;" (click)="startLearning()">
       <mat-icon>play_arrow</mat-icon>
       Start
     </button>
@@ -52,5 +52,8 @@
   <div *ngIf="!isLearningPathGenerated">
     <mat-spinner mode="indeterminate"></mat-spinner>
     <p>Learning path is being generated. Please wait</p>
+  </div>
+  <div *ngIf="isLearningPathGenerated && steps.length > 0">
+    <app-multiple-choice [question]="multipleChoiceQuestions[multipleChoiceQuestionIndex]" (questionSubmitted)="nextMultipleChoiceQuestion()" ></app-multiple-choice>
   </div>
 </mat-drawer-container>
