@@ -105,6 +105,20 @@ def save_results(user_id, learning_path_id, results):
     )
     client.close()
 
+def get_multiple_choice_question(learning_path_id, index: int = -1):
+    with MongoClient(os.getenv("MONGO_URI")) as client:
+        db = client[os.getenv("DB_NAME")]
+        questions = list(db[os.getenv("USER_PROGRESS_COLLECTION")].find({
+            "learning_path_id": learning_path_id,
+        },
+            {"_id": 0}
+        ))
+
+        if index == -1:
+            return questions
+
+        return questions[index] if index < len(questions) else None
+
 
 if __name__ == "__main__":
     # user_id = input("Enter your user ID: ")

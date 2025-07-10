@@ -34,19 +34,26 @@ app.add_middleware(
 )
 
 
-@app.get("/vocab/{user_id}")
-def get_vocab_question(user_id: str):
-    user_progress = learn_vocab.get_user_progress(user_id)
-    vocab_json = learn_vocab.generate_vocab_question(user_progress)
-    return VocabQuestion.model_validate_json(vocab_json)
+@app.get("/vocab/{learning_path_id}/{index}")
+def get_vocab_question(learning_path_id: str, index: int):
+    vocab = learn_vocab.get_vocab_question(learning_path_id, index)
+    return vocab
 
 
-@app.get('/multiple-choice/{user_id}')
-def get_multiple_choice_question(user_id: str):
-    user_progress = multiple_choice.get_user_progress(user_id)
-    question_json = multiple_choice.generate_question(user_progress)
-    multiple_choice.store_question_in_vector_db(question_json)
-    return MultipleChoiceQuestion.model_validate_json(question_json)
+@app.get("/vocab/{learning_path_id}")
+def get_vocab_questions(learning_path_id: str):
+    return learn_vocab.get_vocab_question(learning_path_id)
+
+
+@app.get('/multiple-choice/{learning_path_id}/{index}')
+def get_multiple_choice_question(learning_path_id: str, index: int):
+    question = multiple_choice.get_multiple_choice_question(learning_path_id, index)
+    return question
+
+
+@app.get('/multiple-choice/{learning_path_id}')
+def get_multiple_choice_questions(learning_path_id: str):
+    return multiple_choice.get_multiple_choice_question(learning_path_id)
 
 
 @app.post('/conversation')
@@ -101,6 +108,7 @@ async def start_generating_learning_path(user_id: str):
 
     return {"learning_path_id": learning_path_id}
 
+
 @app.get("/learning_path/{user_id}/{learning_path_id}")
 async def get_learning_path_status(user_id: str, learning_path_id: str):
     with MongoClient(os.environ.get("MONGO_URI")) as client:
@@ -115,6 +123,8 @@ async def get_learning_path_status(user_id: str, learning_path_id: str):
         return {
             "status": learning_path["state"],
         }
+
+
 if __name__ == "__main__":
     load_dotenv(find_dotenv())
 

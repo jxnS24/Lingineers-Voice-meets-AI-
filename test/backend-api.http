@@ -1,8 +1,8 @@
-### GET vocabs for User with ID 123
-GET http://localhost:8000/vocab/123
+### GET vocabs
+GET http://localhost:8000/vocab/aeb7c97a-880f-4d26-aa6e-1b1af074a9c9
 
 ### GET Multiple Choice for User with ID 123
-GET http://localhost:8000/multiple-choice/123
+GET http://localhost:8000/multiple-choice/aeb7c97a-880f-4d26-aa6e-1b1af074a9c9/2
 
 ### POST
 POST http://localhost:8000/conversation
@@ -24,3 +24,6 @@ Content-Type: application/json
 
 ### Test GET
 GET http://localhost:8000/learning_path/user123
+
+### GET status
+GET http://localhost:8000/learning_path/user123/4d00476b-b3f6-4f83-bfd3-1242316b11b3

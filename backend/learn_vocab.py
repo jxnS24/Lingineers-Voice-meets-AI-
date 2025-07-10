@@ -85,6 +85,22 @@ def save_results(user_id, vocab, user_answer, correct, learning_path_id):
             upsert=True
         )
 
+
+def get_vocab_question(learning_path_id, index: int = -1):
+
+    with MongoClient(os.getenv("MONGO_URI")) as client:
+        db = client[os.getenv("DB_NAME")]
+        vocabs = list(db[os.getenv("USER_PROGRESS_VOCAB_COLLECTION")].find({
+            "learning_path_id": learning_path_id,
+        },
+            {"_id": 0}
+        ))
+
+        if index == -1:
+            return vocabs
+
+        return vocabs[index] if index < len(vocabs) else None
+
 # if __name__ == "__main__":
 #     user_id = '123'
 #     progress = get_user_progress(user_id)
