@@ -1,5 +1,5 @@
 ### GET vocabs
-GET http://localhost:8000/vocab/2d41d590-1b92-4c46-b7bc-57038e365004
+GET http://localhost:8000/vocab/c594cd9c-e2f8-49f3-84e3-f8b097c5b5e6
 
 ### GET Multiple Choice for User with ID 123
 GET http://localhost:8000/multiple-choice/2d41d590-1b92-4c46-b7bc-57038e365004

@@ -1,0 +1,16 @@
+<div class="learn-vocab-container">
+  <h2 class="vocab-title">
+    <mat-icon>translate</mat-icon>
+    Vocabulary Practice
+  </h2>
+  <div class="vocab-question" *ngIf="question">
+    <span>Translate this word into English:</span>
+    <div class="german-word">{{ question.german }}</div>
+  </div>
+  <form class="vocab-form" (ngSubmit)="submitAnswer()">
+    <mat-form-field class="vocab-input" appearance="outline">
+      <input matInput [(ngModel)]="userAnswer" name="userAnswer" placeholder="Your answer..." autocomplete="off" required />
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!userAnswer.trim()">Submit</button>
+  </form>
+</div>

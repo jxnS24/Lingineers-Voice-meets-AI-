@@ -20,33 +20,18 @@
   </mat-drawer>
 
   <div class="example-sidenav-content">
-    <button type="button" mat-button (click)="drawer.toggle()">
-      Toggle sidebar
+    <button type="button" mat-raised-button (click)="drawer.toggle()">
+      Open your learning assistant
     </button>
-<h2 class="main-menu-title">Welcome to your AI-Learning experience!</h2>
-    <button mat-raised-button color="accent" class="start-btn" style="margin-bottom: 32px;" (click)="startLearning()">
-      <mat-icon>play_arrow</mat-icon>
-      Start
-    </button>
+    <h2 class="main-menu-title">Welcome to your AI-Learning experience!</h2>
     <div class="main-menu-bottom">
-      <div class="main-menu-buttons">
-        <button mat-raised-button color="primary" routerLink="/learn-vocab">
-          <mat-icon>menu_book</mat-icon>
-          Learn Vocab
-        </button>
-        <button mat-raised-button color="primary" routerLink="/multiple-choice">
-          <mat-icon>quiz</mat-icon>
-          Multiple Choice
-        </button>
-        <button mat-raised-button color="primary" routerLink="/ai-conversation">
-          <mat-icon>chat</mat-icon>
-          AI Conversation
-        </button>
-      </div>
-      <button mat-stroked-button color="primary" class="logout-btn" (click)="logout()">
-        <mat-icon>logout</mat-icon>
-        Logout
-      </button>
+    </div>
+    <button mat-stroked-button color="primary" class="logout-btn" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+    <div *ngIf="isComplete">
+      Your Score: {{ correctAnswers }} / {{ correctAnswers + incorrectAnswers }}<br>
     </div>
   </div>
   <div class="learning-path-spinner" *ngIf="!isLearningPathGenerated">
@@ -54,6 +39,16 @@
     <p class="learning-path-message">Learning path is being generated. Please wait ...</p>
   </div>
   <div *ngIf="isLearningPathGenerated && steps.length > 0">
-    <app-multiple-choice [question]="multipleChoiceQuestions[multipleChoiceQuestionIndex]" (questionSubmitted)="nextMultipleChoiceQuestion()" ></app-multiple-choice>
+    @if (currentQuestionType == "multiple_choice") {
+      <app-multiple-choice *ngIf="multipleChoiceQuestionIndex < multipleChoiceQuestions.length"
+                           [question]="multipleChoiceQuestions[multipleChoiceQuestionIndex]"
+                           (questionSubmitted)="nextMultipleChoiceQuestion($event)"></app-multiple-choice>
+    } @else if (currentQuestionType == "vocab") {
+      <app-learn-vocab *ngIf="vocabQuestionIndex < vocabQuestions.length"
+                       [question]="vocabQuestions[vocabQuestionIndex]"
+                       (questionSubmitted)="nextVocabQuestion($event)"></app-learn-vocab>
+    } @else {
+      <app-conversation></app-conversation>
+    }
   </div>
 </mat-drawer-container>
