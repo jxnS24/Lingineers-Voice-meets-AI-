@@ -66,4 +66,4 @@ if __name__ == "__main__":
             exit = True
         ai_response = ask_ollama(user_input)
         print("AI:", ai_response)
-        speak(ai_response)
+        #speak(ai_response)

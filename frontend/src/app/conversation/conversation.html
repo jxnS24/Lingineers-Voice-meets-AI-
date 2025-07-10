@@ -1,10 +1,15 @@
+<button mat-raised-button color="primary" routerLink="/main-menu" class="back-btn">
+  <mat-icon>arrow_back</mat-icon>
+  Back to main menu
+</button>
 <div class="conversation-container">
   <h2 class="conversation-title">
     <mat-icon>chat</mat-icon>
     AI Conversation
   </h2>
   <div class="messages-area">
-    <div *ngFor="let msg of messages" class="message" [ngClass]="{'ai-message': msg.sender === 'ai', 'user-message': msg.sender === 'user'}">
+    <div *ngFor="let msg of messages" class="message"
+         [ngClass]="{'ai-message': msg.sender === 'ai', 'user-message': msg.sender === 'user'}">
       <mat-icon class="avatar" *ngIf="msg.sender === 'ai'">smart_toy</mat-icon>
       <mat-icon class="avatar" *ngIf="msg.sender === 'user'">person</mat-icon>
       <span>{{ msg.text }}</span>
@@ -13,7 +18,8 @@
   </div>
   <form class="input-row" (ngSubmit)="sendMessage()">
     <mat-form-field class="input-field" appearance="outline">
-      <input matInput [(ngModel)]="inputMessage" placeholder="Speak or type your message..." name="inputMessage" autocomplete="off" />
+      <input matInput [(ngModel)]="inputMessage" placeholder="Speak or type your message..." name="inputMessage"
+             autocomplete="off"/>
     </mat-form-field>
     <button mat-icon-button color="primary" type="button" (click)="startSpeechToText()" class="mic-btn">
       <mat-icon>mic</mat-icon>
