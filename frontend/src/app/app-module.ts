@@ -17,6 +17,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MultipleChoiceComponent} from './multiple-choice-component/multiple-choice-component';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { LearnVocab } from './learn-vocab/learn-vocab';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MainMenuComponent,
     Conversation,
     MultipleChoiceComponent,
-    MultipleChoiceComponent
+    MultipleChoiceComponent,
+    LearnVocab
   ],
   imports: [
     BrowserModule,

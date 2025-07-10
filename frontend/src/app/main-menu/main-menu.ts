@@ -3,8 +3,9 @@ import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {LearningPath} from '../services/learning-path';
 import {LearningPathStep} from '../types/learning-path';
-import {MultipleChoiceQuestion} from '../types/mutliple-choice';
+import {MultipleChoiceOption, MultipleChoiceQuestion} from '../types/mutliple-choice';
 import {QuestionService} from '../services/question';
+import {LearningVocab} from '../types/learn-vocab';
 
 @Component({
   selector: 'app-main-menu',
@@ -24,6 +25,17 @@ export class MainMenuComponent implements OnInit {
   multipleChoiceQuestions: MultipleChoiceQuestion[] = []
   multipleChoiceQuestionIndex: number = 0;
 
+  vocabQuestions: LearningVocab[] = [];
+  vocabQuestionIndex: number = 0;
+
+  correctAnswers: number = 0;
+  incorrectAnswers: number = 0;
+
+  currentQuestionType = '';
+  currentQuestionIndex: number = 0;
+
+  isComplete: boolean = false;
+
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -41,7 +53,7 @@ export class MainMenuComponent implements OnInit {
           console.log('Learning path finished');
           this.isLearningPathGenerated = true;
           clearInterval(intervalId);
-
+          this.startLearning()
         }
       });
     }, 10_000);
@@ -80,15 +92,63 @@ export class MainMenuComponent implements OnInit {
       let steps: LearningPathStep[] = response.steps;
       if (steps && steps.length > 0) {
         this.steps = steps;
+        console.log(this.steps)
         this.questionService.getMultipleChoiceQuestions(this.learningPathService.getLearningPathUuid()).subscribe(questions => {
           this.multipleChoiceQuestions = questions;
+
+          this.questionService.getVocabQuestions(this.learningPathService.getLearningPathUuid()).subscribe(questions => {
+            this.vocabQuestions = questions;
+
+            this.currentQuestionType = this.steps[this.currentQuestionIndex].type;
+
+            if (this.currentQuestionType == 'conversation') {
+              this.nextQuestion();
+            }
+
+          });
         });
+
       }
     })
   }
 
-
-  nextMultipleChoiceQuestion() {
+  nextMultipleChoiceQuestion(option: MultipleChoiceOption) {
     this.multipleChoiceQuestionIndex++;
+    console.log('multi', option)
+
+    if (option) {
+      this.correctAnswers++;
+    } else {
+      this.incorrectAnswers++;
+    }
+    this.nextQuestion();
+  }
+
+  nextVocabQuestion(event: any) {
+    this.vocabQuestionIndex++;
+
+    if (event) {
+      this.correctAnswers++;
+    } else {
+      this.incorrectAnswers++;
+    }
+
+    this.nextQuestion();
+  }
+
+  nextQuestion() {
+    ++this.currentQuestionIndex
+
+    if (this.currentQuestionIndex >= this.steps.length) {
+      this.isComplete = true;
+      console.log('done')
+      return;
+    }
+
+    this.currentQuestionType = this.steps[this.currentQuestionIndex].type;
+
+    if (this.currentQuestionType == 'conversation') {
+      this.nextQuestion();
+    }
   }
 }
