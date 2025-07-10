@@ -49,4 +49,8 @@
       </button>
     </div>
   </div>
+  <div *ngIf="!isLearningPathGenerated">
+    <mat-spinner mode="indeterminate"></mat-spinner>
+    <p>Learning path is being generated. Please wait</p>
+  </div>
 </mat-drawer-container>

@@ -30,7 +30,8 @@ if collection.count() == 0:
     print("Creating datasets")
     store_documents(MODEL_NAME, collection)
 
-input = ""
+input = "Was heißt Hund auf Englisch?"
+
 
 response = ollama.embed(MODEL_NAME, input=input)
 

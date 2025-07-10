@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login';
 import { MainMenuComponent } from './main-menu/main-menu';
 import { provideHttpClient } from '@angular/common/http';
 import { Conversation } from './conversation/conversation';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -21,17 +22,19 @@ import { Conversation } from './conversation/conversation';
     MainMenuComponent,
     Conversation
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    MatButtonModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatFormFieldModule, // add this
-    MatInputModule      // add this
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        MatButtonModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatProgressSpinnerModule,
+        // add this
+    ],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideHttpClient()

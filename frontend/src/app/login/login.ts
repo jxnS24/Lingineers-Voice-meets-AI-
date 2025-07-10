@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {LoginResponse} from '../types/Login';
 import { Router } from '@angular/router';
+import {LearningPath} from '../services/learning-path';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,11 @@ export class LoginComponent {
   password = '';
   message = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private learningPathService: LearningPath
+  ) {}
 
   onSubmit() {
     this.http.post<LoginResponse>('http://localhost:8000/login', {username: this.username, password: this.password})
@@ -23,7 +28,11 @@ export class LoginComponent {
           if (response.status == 'success') {
             localStorage.setItem('username', response.message);
             this.message = 'Login successful! Username stored';
-            this.router.navigate(['/main-menu']); // Redirect to main menu
+            // Trigger learning path generation
+            this.learningPathService.triggerLearningPathGeneration(this.username).subscribe(response => {
+              this.learningPathService.setLearningPathUuid(response.learning_path_id);
+              this.router.navigate(['/main-menu']); // Redirect to main menu
+            });
           } else {
             this.message = response.message || 'Login failed';
           }
