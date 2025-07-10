@@ -9,7 +9,8 @@
       </div>
       <form class="chat-input-row" (ngSubmit)="sendMessage()">
         <mat-form-field class="chat-input" appearance="outline">
-          <input matInput [(ngModel)]="inputMessage" name="inputMessage" placeholder="Type your message..." autocomplete="off" />
+          <input matInput [(ngModel)]="inputMessage" name="inputMessage" placeholder="Type your message..."
+                 autocomplete="off"/>
         </mat-form-field>
         <button mat-icon-button color="primary" type="submit" [disabled]="!inputMessage.trim()">
           <mat-icon>send</mat-icon>
@@ -22,7 +23,7 @@
     <button type="button" mat-button (click)="drawer.toggle()">
       Toggle sidebar
     </button>
-    <h2>Welcome to the Main Menu</h2>
+<h2 class="main-menu-title">Welcome to your AI-Learning experience!</h2>
     <button mat-raised-button color="accent" class="start-btn" style="margin-bottom: 32px;">
       <mat-icon>play_arrow</mat-icon>
       Start
