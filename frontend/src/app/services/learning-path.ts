@@ -18,7 +18,15 @@ export class LearningPath {
   }
 
   getStatusForLearningPath(userId: string) {
-    return this.http.get<LearningPathStatusResponse>('http://localhost:8000/learning_path/' + userId + '/' + this.learningPathUuid);
+    if (!this.learningPathUuid) {
+      throw new Error('Learning path UUID is not set. Please set it before calling this method.');
+    }
+
+    return this.http.get<LearningPathStatusResponse>('http://localhost:8000/learning_path/' + userId + '/' + this.learningPathUuid + '/status');
+  }
+
+  getLearningpath(userId: string) {
+    return this.http.get<any>('http://localhost:8000/learning_path/' + userId + '/' + this.learningPathUuid);
   }
 
   setLearningPathUuid(uuid: string) {

@@ -1,4 +1,5 @@
 import asyncio
+import json
 import os
 import uuid
 
@@ -109,7 +110,7 @@ async def start_generating_learning_path(user_id: str):
     return {"learning_path_id": learning_path_id}
 
 
-@app.get("/learning_path/{user_id}/{learning_path_id}")
+@app.get("/learning_path/{user_id}/{learning_path_id}/status")
 async def get_learning_path_status(user_id: str, learning_path_id: str):
     with MongoClient(os.environ.get("MONGO_URI")) as client:
         db = client[os.environ.get("DB_NAME")]
@@ -123,6 +124,24 @@ async def get_learning_path_status(user_id: str, learning_path_id: str):
         return {
             "status": learning_path["state"],
         }
+
+@app.get("/learning_path/{user_id}/{learning_path_id}")
+def get_learning_path(user_id: str, learning_path_id: str):
+    def remove_ids(obj):
+        if isinstance(obj, dict):
+            return {k: remove_ids(v) for k, v in obj.items() if k != "_id"}
+        elif isinstance(obj, list):
+            return [remove_ids(item) for item in obj]
+        else:
+            return obj
+
+    with MongoClient(os.environ.get("MONGO_URI")) as client:
+        db = client[os.environ.get("DB_NAME")]
+        learning_path = db[os.environ.get("LEARNING_PATH_COLLECTION")].find_one(
+            {"learning_path_id": learning_path_id, "user_id": user_id}
+        )
+
+        return remove_ids(learning_path)
 
 
 if __name__ == "__main__":

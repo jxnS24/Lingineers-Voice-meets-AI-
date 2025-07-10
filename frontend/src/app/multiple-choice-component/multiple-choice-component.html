@@ -1,0 +1,13 @@
+<form>
+  <p>{{question.question.question!}}</p>
+  <mat-radio-group [(ngModel)]="selectedOption" name="options">
+  <mat-radio-button
+      *ngFor="let option of question.question.options; let i = index"
+      [value]="option"
+      class="option"
+    >
+      {{option.text}}
+    </mat-radio-button>
+  </mat-radio-group>
+  <button mat-raised-button color="primary" (click)="submitAnswer()" [disabled]="!selectedOption">Antwort absenden</button>
+</form>
